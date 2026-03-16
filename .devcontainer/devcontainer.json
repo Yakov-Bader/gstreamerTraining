@@ -1,0 +1,22 @@
+{
+    "name": "GStreamer C Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake"
+            ],
+            "settings": {
+                "cmake.configureOnOpen": true
+            }
+        }
+    }
+}
