@@ -17,6 +17,7 @@ tutorial_main (int argc, char *argv[])
   gst_init (&argc, &argv);
 
   /* Create the elements */
+  /* code I added/changed */
   source = gst_element_factory_make ("videotestsrc", "source");
   conv1  = gst_element_factory_make ("videoconvert", "conv1");
   filter = gst_element_factory_make ("vertigotv", "filter");
@@ -39,6 +40,7 @@ tutorial_main (int argc, char *argv[])
     gst_object_unref (pipeline);
     return -1;
   }
+  /* until here I added/changed*/
 
   /* Modify the source's properties */
   g_object_set (source, "pattern", 0, NULL);
