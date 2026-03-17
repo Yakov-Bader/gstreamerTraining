@@ -7,29 +7,34 @@
 int
 tutorial_main (int argc, char *argv[])
 {
-  GstElement *pipeline, *source, *sink;
+  GstElement *pipeline, *source, *filter, *sink;
   GstBus *bus;
   GstMessage *msg;
   GstStateChangeReturn ret;
+  GstElement *conv1, *conv2;
 
   /* Initialize GStreamer */
   gst_init (&argc, &argv);
 
   /* Create the elements */
   source = gst_element_factory_make ("videotestsrc", "source");
-  sink = gst_element_factory_make ("autovideosink", "sink");
+  conv1  = gst_element_factory_make ("videoconvert", "conv1");
+  filter = gst_element_factory_make ("vertigotv", "filter");
+  conv2  = gst_element_factory_make ("videoconvert", "conv2");
+  sink   = gst_element_factory_make ("autovideosink", "sink");
 
   /* Create the empty pipeline */
   pipeline = gst_pipeline_new ("test-pipeline");
 
-  if (!pipeline || !source || !sink) {
+  if (!pipeline || !source || !filter || !sink) {
     g_printerr ("Not all elements could be created.\n");
     return -1;
   }
 
   /* Build the pipeline */
-  gst_bin_add_many (GST_BIN (pipeline), source, sink, NULL);
-  if (gst_element_link (source, sink) != TRUE) {
+  gst_bin_add_many (GST_BIN (pipeline), source, conv1, filter, conv2, sink, NULL);
+
+  if (!gst_element_link_many (source, conv1, filter, conv2, sink, NULL)) {
     g_printerr ("Elements could not be linked.\n");
     gst_object_unref (pipeline);
     return -1;
