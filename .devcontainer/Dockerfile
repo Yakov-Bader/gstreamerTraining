@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
     libgstreamer-plugins-bad1.0-dev \
+    libgtk-3-dev \
     # GStreamer Runtime Plugins
     gstreamer1.0-plugins-base \
     gstreamer1.0-plugins-good \
